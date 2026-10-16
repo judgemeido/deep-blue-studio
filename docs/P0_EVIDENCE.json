@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-16",
+  "phase": "P0",
+  "browser": "current in-app browser; viewport emulation only",
+  "userReview": "pending",
+  "preview": "http://127.0.0.1:4175/",
+  "content": { "claims": 16, "sources": 7, "steps": 5, "shots": 6, "originalDiagrams": 8 },
+  "checks": {
+    "fiveStepSequentialNavigation": "passed with state-synchronized observation",
+    "layerShortcuts": "passed: node->04, chip->05, cluster->01",
+    "directStepPreviousReset": "passed: step03->previous02->reset01",
+    "sourceDialogsEscapeFocusReturn": "passed",
+    "keyboardEnterPreview": "passed",
+    "skipLinkOnReferences": "passed: hash remains #references, focus main",
+    "factFilters": { "all": 16, "confirmed": 8, "qualified": 2, "schematic": 3, "pending": 3 },
+    "museumImages": { "cabinetNaturalWidth": 600, "dieNaturalWidth": 600 },
+    "reviewPersistence": "passed: test status and note restored after reload",
+    "testReviewCleanup": "passed: all five pending; notes empty after reload",
+    "downloadExport": "not completed: browser download approval declined; no workaround attempted",
+    "capturedBrowserErrorsAndWarnings": [],
+    "reducedMotion": "CSS reviewed only; browser preference not emulated",
+    "photoFailureInjection": "not performed; loading fallback observed",
+    "screenshots": "visually inspected in browser tool output; not archived as files"
+  },
+  "viewports": [
+    { "requested": [1366, 768], "inner": [1366, 768], "contentWidth": 1366, "scrollWidth": 1366, "pageHeight": 768, "ctaVisible": true, "panelClientHeight": 569, "panelScrollHeight": 569 },
+    { "requested": [1280, 720], "inner": [1280, 720], "contentWidth": 1280, "scrollWidth": 1280, "pageHeight": 720, "ctaVisible": true, "panelClientHeight": 521, "panelScrollHeight": 521 },
+    { "requested": [390, 844], "inner": [390, 844], "contentWidth": 375, "scrollWidth": 375, "pageHeight": 873, "ctaVisible": true, "panelClientHeight": 325, "panelScrollHeight": 325 },
+    { "requested": [360, 800], "inner": [360, 800], "contentWidth": 345, "scrollWidth": 345, "pageHeight": 890, "ctaReachable": true, "panelClientHeight": 342, "panelScrollHeight": 342 }
+  ],
+  "earlierAttempt": "One immediate batched step assertion failed. Subsequent UI-state-synchronized checks passed; initial failure excluded from pass claims.",
+  "outOfScope": ["3D geometry and collision acceptance", "GPU performance", "search execution", "actual mobile hardware", "cross-browser coverage"]
+}

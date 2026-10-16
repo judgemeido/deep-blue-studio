@@ -1,0 +1,30 @@
+{
+  "phase": "P0",
+  "units": "display-unit; not metres",
+  "axes": { "up": "+Y", "front": "+Z", "right": "+X" },
+  "configuration": {
+    "cabinetCount": { "value": 2, "status": "confirmed", "sources": ["S7"] },
+    "searchNodeCount": { "value": 30, "status": "confirmed", "sources": ["S1"] },
+    "cpusPerNode": { "value": 1, "status": "confirmed", "sources": ["S1"] },
+    "cardsPerNode": { "value": 2, "status": "confirmed", "sources": ["S2"] },
+    "chipsPerCard": { "value": 8, "status": "confirmed", "sources": ["S2"] },
+    "chessChipCount": { "value": 480, "status": "confirmed", "sources": ["S1", "S2"] }
+  },
+  "draftGeometry": {
+    "status": "schematic",
+    "cabinet": { "width": 1.55, "height": 3.8, "depth": 1.75 },
+    "gapBetweenCabinets": 0.38,
+    "selectedNodeId": "teaching-node-14",
+    "nodeNumbering": "teaching-only; no claimed historical slot map",
+    "microScale": "explicit magnified teaching view; physical package dimensions pending"
+  },
+  "motionSequence": [
+    { "id": "door", "parent": "cabinet", "motion": "rotate around hinge on Y", "dependsOn": [], "check": "door sweep clears table and node corridor" },
+    { "id": "disconnect", "parent": "node", "motion": "show released connectors", "dependsOn": ["door"], "check": "no connected cable stretches through extraction" },
+    { "id": "node", "parent": "cabinet", "motion": "translate along +Z", "dependsOn": ["disconnect"], "check": "fully outside cabinet before cover moves" },
+    { "id": "cover", "parent": "node", "motion": "lift on +Y then translate to free side", "dependsOn": ["node"], "check": "cover remains separate from PCB and camera target" },
+    { "id": "card", "parent": "node", "motion": "release connector then move along insertion axis; orient only after clear", "dependsOn": ["cover"], "check": "card does not rotate through connector or second card" },
+    { "id": "chip", "parent": "card", "motion": "switch to explicitly magnified schematic cross-section", "dependsOn": ["card"], "check": "not presented as a documented service procedure" }
+  ],
+  "p1Checks": ["front/side/top at start, middle and end of each motion", "reset from intermediate states derives from original poses", "scene labels and camera share step progress", "reduced motion reaches same final states"]
+}

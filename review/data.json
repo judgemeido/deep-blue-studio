@@ -1,0 +1,58 @@
+{
+  "version": "P0.1",
+  "verifiedAt": "2026-10-16",
+  "sources": [
+    { "id": "S1", "title": "Deep Blue · 系统作者论文", "author": "Murray Campbell / A. Joseph Hoane Jr. / Feng-hsiung Hsu", "year": "2002（链接为 2001 作者稿）", "kind": "作者论文", "url": "https://sjeng.org/ftp/deepblue.pdf", "locator": "§2 System Overview；§3；Table 1", "use": "比赛系统配置、三层搜索、软硬件分工", "limit": "用于配置与逻辑，不据此推定机柜外壳、封装或卡上器件坐标。" },
+    { "id": "S2", "title": "IBM’s Deep Blue Chess Grandmaster Chips", "author": "Feng-hsiung Hsu / IEEE Micro", "year": "1999", "kind": "设计者论文", "url": "https://www.computerhistory.org/chess/doc-431615395d43e/", "locator": "IEEE Micro 70–81 页；系统板卡说明及芯片功能图", "use": "每节点两卡各 8 芯片、功能方框图", "limit": "功能图不等于真实裸片区域轮廓；板卡物理排布仍待近摄。" },
+    { "id": "S4", "title": "Deep Blue · IBM 历史档案", "author": "IBM", "year": "历史介绍", "kind": "机构档案", "url": "https://www.ibm.com/history/deep-blue", "locator": "比赛结果与系统介绍段", "use": "1997 年比赛日期、总比分及沿革", "limit": "出现 32 处理器的简史口径，比赛搜索配置以 S1 的 30 节点为基线。" },
+    { "id": "S5", "title": "Twenty years after Deep Blue, what can AI do for us?", "author": "Murray Campbell 接受 Peter Sayer / IDG 采访", "year": "2017-05-11", "kind": "当事人访谈", "url": "https://www.computerworld.com/article/1680254/twenty-years-after-deep-blue-what-can-ai-do-for-us-2.html", "locator": "随机着法故障与修复的问答", "use": "第一局随机落子故障与第二局的区别", "limit": "对卡斯帕罗夫心理的影响，当事人也明确称为推测。" },
+    { "id": "S6", "title": "Oral History of Murray Campbell", "author": "Computer History Museum / Dag Spicer", "year": "2005 访谈；2006 馆藏", "kind": "口述史", "url": "https://archive.computerhistory.org/resources/access/text/2013/05/102657914-05-01-acc.pdf", "locator": "X3256.2006；并行搜索、团队演进与比赛回忆", "use": "人的工作与并行搜索的困难", "limit": "回忆材料与工程论文互证，不据此补造零件外观。" },
+    { "id": "S7", "title": "Deep Blue II · 双塔机柜照片", "author": "Computer History Museum / IBM Archives", "year": "1997", "kind": "馆藏照片", "url": "https://www.computerhistory.org/chess/art-43305f13ef377/", "image": "https://images.computerhistory.org/chess/deep-blue-1.1997.l062302016.ibm-archives.jpg?w=600", "locator": "L062302016", "use": "黑色柜体、网孔门、顶部 01/02 编号与轮廓", "limit": "低角度照片不能提供精确尺寸，也不能确认柜内槽位。照片为在线研究参考，版权归原权利人。" },
+    { "id": "S8", "title": "Deep blue chip · 裸片近摄", "author": "Computer History Museum；Feng-hsiung Hsu 捐赠", "year": "1997", "kind": "馆藏照片", "url": "https://www.computerhistory.org/chess/art-431614f45291e/", "image": "https://images.computerhistory.org/chess/deep-blue-chip.1997.102633907.jpg?w=600", "locator": "102633907", "use": "裸片轮廓、光泽与细密区域纹理", "limit": "照片不是完整封装；尺寸不当作 QFP 外壳尺寸。在线参考不随项目打包复制。" }
+  ],
+  "claims": [
+    { "id": "F01", "status": "confirmed", "subject": "搜索配置", "copy": "1997 年比赛系统以 30 个主处理器节点和 480 颗象棋芯片执行搜索。", "sources": ["S1", "S7"], "locator": "S1 §2", "decision": "首屏使用比赛搜索配置口径；不把 30 个节点画成未经核对的 30 个柜门槽位。" },
+    { "id": "F02", "status": "confirmed", "subject": "节点 CPU", "copy": "每个搜索节点对应一个 P2SC 主处理器。", "sources": ["S1"], "locator": "S1 §2", "decision": "选中节点显示一个 CPU 主体；散热器形状为教学重建。" },
+    { "id": "F03", "status": "confirmed", "subject": "板卡数量", "copy": "每节点两块加速卡，每块 8 颗象棋芯片，总计 16 颗。", "sources": ["S2"], "locator": "S2 系统板卡说明", "decision": "两卡都保留；只对其中一张进行下一层特写。" },
+    { "id": "F04", "status": "confirmed", "subject": "软硬件协作", "copy": "主节点搜索上层，工作节点继续搜索，专用芯片处理更深层搜索。", "sources": ["S1"], "locator": "S1 §2", "decision": "CPU 既做搜索也分派；任务有明确局面输入与返回结果。" },
+    { "id": "F05", "status": "confirmed", "subject": "芯片功能", "copy": "着法生成、局面评估和搜索控制是核心功能；另有走法栈与重复检测。", "sources": ["S1", "S2"], "locator": "S1 §3.1–3.3", "decision": "四个教学热点，其中重复检测为辅助功能；彩色范围不声称是真实版图。" },
+    { "id": "F06", "status": "confirmed", "subject": "置换表归属", "copy": "软件搜索使用置换表，实际硬件搜索没有置换表。", "sources": ["S1"], "locator": "S1 Table 1、§3.3–3.4", "decision": "软件层介绍置换表；芯片不贴“置换表管理”标签。" },
+    { "id": "F07", "status": "qualified", "subject": "速度指标", "copy": "约每秒 2 亿个局面是常见介绍口径，实际搜索速度受局面影响。", "sources": ["S1", "S7"], "locator": "S1 §2；S7 馆藏说明", "decision": "作为带条件的历史标签，不能当浏览器实测或固定速度。" },
+    { "id": "F08", "status": "confirmed", "subject": "比赛结果", "copy": "1997 年 5 月 11 日，深蓝以总比分 3.5∶2.5 赢得六局比赛。", "sources": ["S4"], "locator": "S4 比赛结果段", "decision": "用于宏观层的档案日期与结果展签。" },
+    { "id": "F09", "status": "qualified", "subject": "随机落子故障", "copy": "Campbell 回忆随机落子故障发生在第一局；第二局未触发该故障。", "sources": ["S5"], "locator": "S5 故障问答", "decision": "按当事人访谈归属叙述；心理影响为推测，不作为胜因定论。" },
+    { "id": "F10", "status": "confirmed", "subject": "柜体视觉", "copy": "参考照片可见黑色网孔柜门与顶部 01、02 编号。", "sources": ["S7"], "locator": "S7 照片", "decision": "蓝色作为界面强调色；柜上蓝带、专用金属大铭牌暂不进入历史复原。" },
+    { "id": "F11", "status": "schematic", "subject": "教学空间", "copy": "棋桌、终端与机柜并置，组织成一步棋的计算旅程。", "sources": [], "locator": "本项目设计", "decision": "明确为展览式空间组合；棋桌位置不视为比赛现场复原。" },
+    { "id": "F12", "status": "schematic", "subject": "节点与板形", "copy": "抽屉外壳、滑轨、散热器与 PCB 排布先采用比例示意。", "sources": ["S1", "S2"], "locator": "配置据论文；几何为设计", "decision": "P1 可验证运动；进入 P4 精化前补近摄或保持重建标签。" },
+    { "id": "F13", "status": "schematic", "subject": "节点编号", "copy": "节点 14 是教学选中对象。", "sources": [], "locator": "本项目交互编号", "decision": "不声称它在历史比赛中承担特殊任务。" },
+    { "id": "F14", "status": "pending", "subject": "实测尺寸与重量", "copy": "机柜精确尺寸、总重与能耗比较仍需同口径来源。", "sources": [], "locator": "待核", "decision": "P1 使用一致展示单位，界面不标米制尺寸与能耗倍数。" },
+    { "id": "F15", "status": "pending", "subject": "封装与丝印", "copy": "裸片照片不能确认 QFP 封装和芯片表面编号。", "sources": ["S8"], "locator": "S8 照片范围", "decision": "P1 先用无虚构编号的教学封装；封装开启是说明性动作。" },
+    { "id": "F16", "status": "pending", "subject": "棋盘品牌与道具", "copy": "DGT 品牌、倒下钢笔、椅子款式未取得明确对应资料。", "sources": [], "locator": "待核", "decision": "保留通用棋桌与终端；品牌道具不列必做。" }
+  ],
+  "steps": [
+    { "id": "learn-1", "short": "接到棋局", "layer": "cluster", "asset": "cluster.svg", "title": "机器接到了一个棋局。", "do": "点击“展开可能性”，看自己和对手接下来能怎样走。", "watch": "看棋盘与机柜之间的任务连线：一次输入变成待比较的问题。", "meaning": "机器的任务，是比较候选走法，而不是猜一个答案。", "action": "展开可能性 →", "caption": "01 / 集群全貌 · 展览式空间组合", "focus": "棋盘 → 搜索主节点" },
+    { "id": "learn-2", "short": "展开搜索", "layer": "cluster", "asset": "search.svg", "title": "自己走一步，对手也会回应。", "do": "沿着分支向下看，每一层交替代表双方的一次走子。", "watch": "先选自己更好的选择，再考虑对手会怎样回应。", "meaning": "小树用来解释 Minimax；这些分值是教学数据。", "action": "看看怎样少算 →", "caption": "02 / 搜索树构图 · 固定示意，P3 才接入算法", "focus": "候选分支与双方交替" },
+    { "id": "learn-3", "short": "理解剪枝", "layer": "node", "asset": "pruning.svg", "title": "有些分支已经不会改变选择。", "do": "对照保留和划去的分支，再查看右侧解释。", "watch": "浅色虚线表示可以跳过的分支；不能把它理解成绝无胜算。", "meaning": "P3 会以同一棵树实际运行搜索，对比返回值与访问次数。", "action": "进入计算节点 →", "caption": "03 / 剪枝表达 · 此处只审阅信息顺序", "focus": "剪枝原因 → 相同结果" },
+    { "id": "learn-4", "short": "分派计算", "layer": "node", "asset": "node.svg", "title": "软件把搜索任务继续往下交。", "do": "看选中的节点：一个主 CPU，连接两块各有 8 芯片的加速卡。", "watch": "CPU 继续搜索并分派工作，芯片承担更深层的专用计算。", "meaning": "并行硬件需要协同；节点和芯片不是越多就自动线性加速。", "action": "查看一颗象棋芯片 →", "caption": "04 / 节点剖面 · 配置有据，几何为教学重建", "focus": "1 CPU → 2 卡 × 8 芯片" },
+    { "id": "learn-5", "short": "进入芯片", "layer": "chip", "asset": "chip.svg", "title": "把反复执行的任务，交给专用电路。", "do": "辨认着法生成、评估、搜索控制与重复检测四个教学区域。", "watch": "这些颜色解释功能关系，不对应实际裸片上的区域边界。", "meaning": "人的棋类知识、软件搜索与专用硬件共同构成这台机器。", "action": "完成预览，回到整机 ↺", "caption": "05 / 芯片功能示意 · 版图位置未复原", "focus": "专用功能 → 返回搜索结果" }
+  ],
+  "shots": [
+    { "id": "F01", "layer": "宏观", "asset": "cluster.svg", "title": "先看见机器的体量", "camera": "三分之四正面；双柜为主，棋桌在前侧留出通道。", "action": "机柜完整，棋桌局面待输入；点击开始进入教学。", "question": "为什么算一着棋需要这么大的机器？", "guard": "首屏同时看见目的、主按钮和双柜；道具不挡柜门。", "evidence": "外壳据 S7；棋桌与机柜并置为设计。" },
+    { "id": "F02", "layer": "宏观 → 原理", "asset": "search.svg", "title": "从棋局展开少量可能性", "camera": "镜头保持整体；搜索树作为独立教学图层进入。", "action": "先解释双方交替选择，再比较有无剪枝。", "question": "它怎样考虑对手的回应？", "guard": "同一题目与排序；不把示意节点称为历史搜索日志。", "evidence": "原理据 S1；树形与分值为教学设计。" },
+    { "id": "F03", "layer": "宏观 → 中观", "asset": "opening.svg", "title": "先开门，再接近节点", "camera": "向选中机柜缓慢推进；保留机柜边框作为位置参照。", "action": "门板绕铰链让出通道，标记教学节点 14。", "question": "集群里面，一个工作节点是什么？", "guard": "门完全让位后才拉节点；门板与棋桌扫掠范围不相交。", "evidence": "外观据 S7；开门结构和编号位置为教学设计。" },
+    { "id": "F04", "layer": "中观", "asset": "node.svg", "title": "抽出节点，说明分工", "camera": "跟随节点出柜，转到斜俯视；外盖独立移开。", "action": "显示一个 CPU、两块各 8 芯片板卡；指示任务方向。", "question": "通用处理器和专用芯片怎样合作？", "guard": "先断开连接；节点完整出柜后再移开外盖，避免穿插。", "evidence": "数量与分工据 S1/S2；滑轨和主板布局为重建。" },
+    { "id": "F05", "layer": "中观 → 微观", "asset": "card.svg", "title": "沿连接方向取出一张卡", "camera": "聚焦一张 8 芯片板卡；另一张留作参照后逐渐弱化。", "action": "解除连接 → 沿插拔方向抬出 → 转到便于观察的角度。", "question": "为什么需要专用象棋芯片？", "guard": "板卡离开连接器后才旋转；不得把两卡合成一张 16 芯片板。", "evidence": "数量据 S2；PCB 排布为教学示意。" },
+    { "id": "F06", "layer": "微观", "asset": "chip.svg", "title": "用功能剖面收束全程", "camera": "单芯片特写，显示放大示意标签与返回整机入口。", "action": "示意封装分离，裸片与四个功能标签依次出现。", "question": "哪些计算被做进了电路？", "guard": "颜色不宣称真实版图；一键复原按原始姿态计算。", "evidence": "裸片视觉据 S8；功能据 S1/S2；空间分区为设计。" }
+  ],
+  "decisions": [
+    { "id": "D01", "title": "视觉主线", "proposal": "1997 工业计算档案馆：炭黑机柜、暖纸色说明、蓝色选择态、琥珀色任务态。", "check": "机柜为主角，黑色层次能读清，主要操作边框足够明确。" },
+    { "id": "D02", "title": "讲解顺序", "proposal": "棋局 → 搜索 → 剪枝 → 节点协作 → 专用芯片；五步始终显示做什么、看哪里、说明什么。", "check": "无需先读大段文章，就知道下一步点哪里。" },
+    { "id": "D03", "title": "柜体外观", "proposal": "按馆藏照片保留黑色网孔门与 01/02 编号；界面用蓝色呼应主题。", "check": "不凭想象增加蓝色横带或特制大铭牌。" },
+    { "id": "D04", "title": "节点与芯片", "proposal": "配置按论文，未证实的机械细节采用带标签的教学重建。", "check": "一个 CPU、两卡各 8 芯片、功能区示意的边界明确。" },
+    { "id": "D05", "title": "空间与道具", "proposal": "棋桌与机柜组成展览叙事；CRT 保留，钢笔、品牌棋盘和复杂人物道具暂缓。", "check": "道具帮助理解尺度和输入，不遮挡拆解。" }
+  ],
+  "scope": {
+    "p0": ["来源索引与逐项史实表", "真实照片 + 原创示意组成的参考板", "六镜头三层分镜", "桌面与手机可点击线框", "范围清单、待核项和阶段检查点", "独立 Git 仓库与验收记录"],
+    "p1": ["低精度双柜、节点、板卡和芯片模型", "逐阶段拆解、返回与复原", "运动包围盒、通道和相机遮挡验证"],
+    "later": ["P2 材质、灯光与历史环境", "P3 真正可执行的小型搜索实验", "P4 板卡和芯片微观精化", "P5 响应式、性能和完整回归"]
+  }
+}

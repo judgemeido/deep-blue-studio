@@ -1,0 +1,13 @@
+{
+  "name": "deep-blue-studio",
+  "version": "0.0.0-p0",
+  "private": true,
+  "type": "module",
+  "description": "Deep Blue P0 reference board, storyboard and review wireframe",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build-review.mjs",
+    "validate": "node scripts/validate.mjs"
+  }
+}
