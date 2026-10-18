@@ -1,0 +1,9 @@
+{
+ "date":"2026-10-17",
+ "status":"runnable-review-prototype; full acceptance pending",
+ "url":"http://127.0.0.1:4175/prototype/",
+ "automated":{"nodeTests":11,"clearanceSamples":301,"resetCycles":100,"commands":["npm.cmd run build","npm.cmd test","npm.cmd run validate","git diff --check"]},
+ "browser":{"name":"Codex in-app browser","viewports":["1440x1000","390x844"],"checked":["four stations render","rapid retarget","mid-transition reset","perspective restored on reset","Enter navigation","top view","console sample without warn/error"]},
+ "pending":["complete motion three-view screenshot matrix","fault injection","live reduced-motion and hidden-tab tests","full P0 interactive regression","touch hardware and performance","mesh picking"],
+ "screenshots":["evidence/p1/desktop-cluster.png","evidence/p1/desktop-chip.png","evidence/p1/mobile-card.png"]
+}

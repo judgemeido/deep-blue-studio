@@ -1,0 +1,47 @@
+
+> deep-blue-studio@0.0.0-p4 test
+> node --test tests/*.test.mjs
+
+✔ camera has finite distinct sightline for all directions and transition boundaries (4.4189ms)
+✔ card rotates rigidly around its own center outside scaled chassis (115.4356ms)
+✔ fading hardware does not cast opaque shadows and tiny magnified layers do not self-shadow (89.6168ms)
+✔ magnified package clears visible physical hardware before growing; camera stays outside (172.821ms)
+✔ four functional regions have source-backed input/output, not a hardware transposition table (0.8474ms)
+✔ region selection highlights exactly one region, persists across poses and clears on reset (121.2162ms)
+✔ chip detail grows continuously from selected chip and reverses without drift (121.7635ms)
+✔ last segment lasts about two seconds while mechanical segments keep original speed (0.4379ms)
+✔ opening focuses summary, Tab cycles, Escape closes and returns focus (1.2709ms)
+✔ focus cannot escape open explanation and collapsed details do not trap keys (0.2492ms)
+✔ narrow aspect pulls camera back without moving its target or direction (1.8876ms)
+✔ physical teaching node has one CPU, two cards and sixteen chips, with thirty total nodes (102.0783ms)
+✔ sampled motion has clearance and detector catches deliberate card penetration (122.1395ms)
+✔ applying absolute poses is idempotent and reset restores original matrices (56.7693ms)
+✔ mechanical prerequisites and extraction before rotation hold across the trajectory (5.8727ms)
+✔ latest target replaces old requests and reversing is continuous (0.4383ms)
+✔ reset is drift-free, reduced motion has identical final poses, background delta is capped (4.1991ms)
+✔ nonfinite input and out-of-range stations never propagate NaN (0.1847ms)
+✔ chess display includes 64 squares and 32 pieces, all outside extraction corridor (11.8546ms)
+✔ ventilated door uses actual openings, fits frame and shares instanced mesh hardware (2.8268ms)
+✔ single step and reset replace old logs without mutating input (1.0143ms)
+✔ background, reduced motion and huge delta never catch up stale playback (0.2502ms)
+✔ presented board component face points straight at default camera (95.8474ms)
+✔ shadow and floor fade continuously with no endpoint jump (0.5526ms)
+✔ two real tasks use only two workers with no invented speedup (0.6064ms)
+✔ scheduler rejects ambiguous tasks and invalid workers (0.1872ms)
+✔ hand-computed tree returns five and same first best root move, with genuine event counts (1.1301ms)
+✔ ties use first move, negative values and seeded trees agree across algorithms (3.9506ms)
+✔ invalid trees and unknown strategy rejected (0.5104ms)
+✔ P0 and prototype resources resolve, encoded traversal stays forbidden (49.4305ms)
+✔ assembled selected node fits its slot without penetrating neighboring nodes (84.3839ms)
+✔ paint grain repeats deterministically within bounded roughness without external assets (1.8252ms)
+✔ advanced explanation stays open through stepping and playback redraws (5.4594ms)
+✔ chip exploration leaves teaching directly at chip station with content visible (0.8699ms)
+✔ ordinary completion still returns to whole machine (0.3388ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 615.2336

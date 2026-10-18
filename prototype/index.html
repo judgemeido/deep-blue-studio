@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111b25"><title>DEEP BLUE · 走进机器</title><link rel="icon" href="data:,"><link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script></head>
+<body>
+<a class="skip" href="#controls">跳至操作</a>
+<header><a class="brand" href="/">DB<span>DEEP BLUE<small>一步棋背后的机器</small></span></a><div class="header-meta">1997 / 工业计算档案 <span>P4 · 微观分工</span></div><a class="archive" href="/#references">史料与出处 ↗</a></header>
+<div class="mode-bar"><span class="mode-label">自由观察 / 交互教学</span><div class="mobile-tabs" role="group" aria-label="手机显示内容"><button id="show-model" aria-pressed="true">模型</button><button id="show-content" aria-pressed="false">说明 / 教学</button></div><button id="teaching-toggle" type="button" aria-expanded="false" aria-controls="teaching-panel">开始五步教学</button></div><main>
+<section class="stage" aria-label="可操作三维教学模型">
+ <div class="stage-top"><span>1997 / DEEP BLUE · SYSTEM ANATOMY</span><span id="view-label">整体观察</span></div>
+ <canvas id="scene" aria-label="深蓝三维模型，可拖动旋转、滚轮缩放" tabindex="0"></canvas>
+ <div id="error" role="alert" hidden><h2>三维场景暂时无法启动</h2><p id="error-message"></p><a href="/">返回资料与分镜 →</a><button onclick="location.reload()">重新加载</button></div>
+ <div class="stage-caption"><b id="object-label">双柜集群</b><span>教学重建，非实测尺寸</span></div>
+ <div class="view-tools" role="group" aria-label="模型观察方向"><button data-view="perspective" aria-pressed="true">透视</button><button data-view="front" aria-pressed="false">正面</button><button data-view="side" aria-pressed="false">侧面</button><button data-view="top" aria-pressed="false">顶部</button></div>
+ <p class="gesture">拖动旋转 · 滚轮缩放 · 切换层级会重新聚焦</p>
+</section>
+<aside id="controls">
+ <div class="eyebrow">FROM THE SYSTEM TO THE SILICON</div><h1>一步棋，<br>背后的机器。</h1><p class="intro">人设计棋类知识与搜索算法，<br>再让并行硬件把计算推向极限。</p>
+ <section id="chip-inspector" class="chip-inspector" hidden aria-label="芯片功能区说明"></section><nav class="stations" aria-label="观察层级"><button data-station="0" aria-pressed="true"><span>01</span>整机</button><button data-station="1" aria-pressed="false"><span>02</span>节点</button><button data-station="2" aria-pressed="false"><span>03</span>板卡</button><button data-station="3" aria-pressed="false"><span>04</span>芯片</button></nav>
+ <section class="lesson" aria-live="polite" aria-atomic="true"><div class="lesson-meta"><span id="step">01 / 04</span><span id="motion-status">已就位</span></div><h2 id="title">两个柜子，一套系统。</h2><p id="description"></p><div class="observe"><span>看这里</span><p id="observe"></p></div><p id="boundary" class="boundary"></p></section>
+ <button id="next" class="primary">进入节点 <span>→</span></button><div class="secondary"><button id="previous" disabled>← 上一步</button><button id="reset">整机复位 ↺</button></div>
+ <details><summary>配置与重建边界</summary><p>1997 比赛搜索配置：30 节点，每节点 1 个 P2SC、2 张加速卡，每卡 8 颗象棋芯片，共 480 颗。</p><p>每柜 15 节点是教学布局，不代表历史槽位映射。盖板、插拔与封装形状为教学示意，不是维修指导。棋桌、棋子和 CRT 为原创场景道具；棋盘采用开局摆法，不是比赛棋局回放。</p><a href="/#references">查看 P0 史料索引 ↗</a></details>
+</aside>
+<section id="teaching-panel" class="teaching-panel" hidden aria-label="可执行五步教学"></section></main>
+<footer><span>30 <small>搜索节点</small> × 2 <small>卡 / 节点</small> × 8 <small>芯片 / 卡</small> = <strong>480</strong></span><span>人的知识 · 搜索 · 并行硬件</span><a href="/">返回 P0 审阅 ↗</a></footer>
+</body></html>

@@ -1,13 +1,22 @@
 {
   "name": "deep-blue-studio",
-  "version": "0.0.0-p0",
+  "version": "0.0.0-p4",
   "private": true,
   "type": "module",
-  "description": "Deep Blue P0 reference board, storyboard and review wireframe",
-  "engines": { "node": ">=22" },
+  "description": "Deep Blue interactive industrial computing exhibit",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "node scripts/serve.mjs",
-    "build": "node scripts/build-review.mjs",
-    "validate": "node scripts/validate.mjs"
+    "build": "node scripts/build-review.mjs && node scripts/build-prototype.mjs",
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
   }
 }

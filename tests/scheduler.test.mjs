@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {scheduleTasks} from '../src/teaching/scheduler.js';
+test('two real tasks use only two workers with no invented speedup',()=>{for(const workers of [1,4,8]){const r=scheduleTasks([{id:'L',cost:7},{id:'R',cost:7}],workers);assert.equal(r.makespan,workers===1?14:7);assert.equal(r.idleWorkers.length,workers===1?0:workers-2);assert.equal(new Set(r.assignments.map(a=>a.id)).size,2);if(workers===1)assert.equal(r.assignments[1].start,7);}});
+test('scheduler rejects ambiguous tasks and invalid workers',()=>{assert.throws(()=>scheduleTasks([{id:'a',cost:0}],4));assert.throws(()=>scheduleTasks([{id:'a',cost:1},{id:'a',cost:2}],4));assert.throws(()=>scheduleTasks([],3));});
