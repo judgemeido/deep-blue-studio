@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Deep Blue 棋局与机柜教学构图</title>
+  <desc id="desc">棋盘、六局比赛的计时器和网孔机柜组成的档案式场景。</desc>
+  <rect width="1200" height="760" fill="#071d2a"/>
+  <rect x="82" y="88" width="1036" height="560" fill="#10171a" stroke="#bd9b59" stroke-width="4"/>
+  <g transform="translate(160 160) rotate(-5)"><rect width="420" height="420" fill="#b69362"/>
+    <path d="M0 52h420M0 104h420M0 156h420M0 208h420M0 260h420M0 312h420M0 364h420M52 0v420M104 0v420M156 0v420M208 0v420M260 0v420M312 0v420M364 0v420" stroke="#172a2f" stroke-width="2"/>
+    <g fill="#e8efe9"><circle cx="78" cy="75" r="20"/><circle cx="286" cy="180" r="20"/><circle cx="182" cy="285" r="20"/></g>
+    <g fill="#071d2a"><circle cx="130" cy="130" r="20"/><circle cx="338" cy="235" r="20"/><circle cx="234" cy="340" r="20"/></g>
+  </g>
+  <g transform="translate(720 144)"><rect width="260" height="450" fill="#0b1215" stroke="#67949a" stroke-width="4"/><path d="M34 70h192M34 140h192M34 210h192M34 280h192M34 350h192" stroke="#30484c" stroke-width="20"/><text x="36" y="42" fill="#e6bd69" font-family="monospace" font-size="22">01 / 02</text></g>
+  <rect x="560" y="518" width="120" height="70" fill="#1e3941" stroke="#e6bd69" stroke-width="3"/><text x="575" y="561" fill="#e8efe9" font-family="monospace" font-size="22">6:00</text>
+  <text x="120" y="120" fill="#e8efe9" font-family="monospace" font-size="28" letter-spacing="4">NEW YORK / MAY 1997</text>
+</svg>

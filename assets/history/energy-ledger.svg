@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">超级计算能效账本</title>
+  <desc id="desc">原创教学信息图，把算力、功率和热量放在同一张账本上。</desc>
+  <rect width="1200" height="760" fill="#14212b"/>
+  <text x="76" y="96" fill="#d7aa67" font-family="Georgia,serif" font-size="30">POWER LEDGER / 22</text>
+  <text x="76" y="680" fill="#91a6b1" font-family="Segoe UI,sans-serif" font-size="16" letter-spacing="2">PERFORMANCE IS A NUMBER; HEAT IS THE RECEIPT</text>
+  <g stroke="#8ea4ae" fill="#263b49" stroke-width="2"><rect x="110" y="180" width="260" height="330"/><rect x="470" y="180" width="260" height="330"/><rect x="830" y="180" width="260" height="330"/></g>
+  <g fill="#bfc9bc"><rect x="145" y="225" width="190" height="34"/><rect x="145" y="285" width="190" height="34"/><rect x="145" y="345" width="190" height="34"/><rect x="145" y="405" width="190" height="34"/><rect x="505" y="225" width="190" height="34"/><rect x="505" y="285" width="190" height="34"/><rect x="505" y="345" width="190" height="34"/><rect x="505" y="405" width="190" height="34"/><rect x="865" y="225" width="190" height="34"/><rect x="865" y="285" width="190" height="34"/><rect x="865" y="345" width="190" height="34"/><rect x="865" y="405" width="190" height="34"/></g>
+  <g fill="#d7aa67"><rect x="145" y="535" width="190" height="12"/><rect x="505" y="515" width="190" height="32"/><rect x="865" y="470" width="190" height="77"/></g>
+  <g fill="#dce4db" font-family="Segoe UI,sans-serif" font-size="18" text-anchor="middle"><text x="240" y="580">功率</text><text x="600" y="580">热</text><text x="960" y="580">有效算力</text></g>
+  <path d="M370 300h100M730 300h100" stroke="#d7aa67" stroke-width="4" marker-end="url(#arrow)"/>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d7aa67"/></marker></defs>
+</svg>

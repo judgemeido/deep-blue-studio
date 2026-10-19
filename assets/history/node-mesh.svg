@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">并行节点与消息边界</title>
+  <desc id="desc">原创教学信息图，表现并行计算中的节点、边界和消息等待。</desc>
+  <rect width="1200" height="760" fill="#111c27"/>
+  <path d="M80 120h1040M80 640h1040" stroke="#5d7481" stroke-width="2"/>
+  <text x="80" y="88" fill="#d7aa67" font-family="Georgia,serif" font-size="28">NODE MESH / 16</text>
+  <text x="80" y="680" fill="#91a6b1" font-family="Segoe UI,sans-serif" font-size="16" letter-spacing="2">BOUNDARY EXCHANGE · WAIT TIME BECOMES VISIBLE</text>
+  <g fill="#294943" stroke="#99b891" stroke-width="3">
+    <rect x="130" y="190" width="170" height="130"/><rect x="340" y="190" width="170" height="130"/><rect x="550" y="190" width="170" height="130"/><rect x="760" y="190" width="170" height="130"/>
+    <rect x="130" y="400" width="170" height="130"/><rect x="340" y="400" width="170" height="130"/><rect x="550" y="400" width="170" height="130"/><rect x="760" y="400" width="170" height="130"/>
+  </g>
+  <g fill="#cdd7c5" font-family="monospace" font-size="22" text-anchor="middle">
+    <text x="215" y="260">N01</text><text x="425" y="260">N02</text><text x="635" y="260">N03</text><text x="845" y="260">N04</text>
+    <text x="215" y="470">N05</text><text x="425" y="470">N06</text><text x="635" y="470">N07</text><text x="845" y="470">N08</text>
+  </g>
+  <g stroke="#d7aa67" stroke-width="4" fill="none" stroke-dasharray="10 10">
+    <path d="M300 255h40M510 255h40M720 255h40M300 465h40M510 465h40M720 465h40"/>
+    <path d="M215 320v80M425 320v80M635 320v80M845 320v80"/>
+  </g>
+  <circle cx="635" cy="360" r="12" fill="#d7aa67"/>
+  <text x="680" y="366" fill="#d7aa67" font-family="Segoe UI,sans-serif" font-size="18">消息在边界等待</text>
+</svg>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081019">
+  <meta name="description" content="Deep Blue 02 算法档案：从棋盘决定到并行芯片。">
+  <title>02 算法档案 · DEEP BLUE</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#viewport">跳至三维展品</a>
+  <header class="project-header">
+    <a class="project-brand" href="../" aria-label="返回 Deep Blue 历史档案"><span class="archive-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>DEEP BLUE<small>超级计算机历史档案</small></span></a>
+    <nav class="project-nav" aria-label="Deep Blue 项目导航"><a href="../">00 历史档案</a><a href="../prototype/">01 三维展品</a><a href="./" aria-current="page">02 算法档案</a></nav>
+    <div class="project-meta"><span>1997 / SEARCH ARCHIVE</span><small>六条记录 · 3D 教学重建</small></div>
+  </header>
+  <main class="strategy-shell">
+    <aside class="archive-drawer" id="archive-drawer" aria-label="算法档案索引">
+      <div class="drawer-heading"><div><span class="eyebrow">ARCHIVE 02</span><h1>一手棋，<br>怎样变成答案。</h1></div><button id="drawer-toggle" class="icon-button" type="button" aria-label="关闭档案索引">×</button></div>
+      <p class="drawer-intro">从棋盘上的一个决定，沿着搜索树、节点、板卡和芯片，追踪机器如何把未来压缩成一手棋。</p>
+      <div class="cursor-line"><span id="cursor-readout">游标 1 / 6</span><span class="status-dot">档案在线</span></div>
+      <div class="archive-list" id="archive-index" role="listbox" aria-label="六条算法档案"></div>
+      <div class="drawer-foot"><span>教学重建</span><span>来源边界随记录显示</span></div>
+    </aside>
+    <button id="mobile-index" class="mobile-index" type="button" aria-controls="archive-drawer" aria-label="打开档案索引">目录 <span>☰</span></button>
+    <section class="viewport" id="viewport" aria-label="Deep Blue 算法三维展品">
+      <div class="viewport-top"><span>02 / ALGORITHM ARCHIVE</span><span id="camera-label">棋盘决定</span></div>
+      <canvas id="scene" tabindex="0" aria-label="可旋转的 Deep Blue 算法三维模型"></canvas>
+      <div class="scene-caption"><span class="caption-kicker">CURRENT RECORD</span><strong id="record-label">01 / 棋盘决定</strong><span>程序化教学重建 · 非裸片版图</span></div>
+      <div class="camera-dock" role="group" aria-label="镜头预设"><button data-camera="overview">总览</button><button data-camera="board" aria-pressed="true">棋盘</button><button data-camera="tree">搜索树</button><button data-camera="node">节点</button><button data-camera="chip">芯片</button></div>
+      <p class="gesture">拖动旋转 · 滚轮缩放 · 双击回到当前镜头</p>
+    </section>
+    <aside class="record-panel" aria-label="当前档案说明">
+      <div class="record-heading"><span class="eyebrow">READING RECORD</span><span class="record-index" id="progress-readout">0%</span></div>
+      <h2 id="record-title">先看棋盘上的这一手。</h2>
+      <p id="record-description" class="record-description">机器面对的不是一个答案，而是一组必须互相比较的未来。</p>
+      <div class="algorithm-readout" id="algorithm-readout"><span>SEARCH TRACE</span><strong>等待读取当前记录</strong></div>
+      <button class="read-button" id="read-record" type="button"><span>读取当前记录</span><b>↗</b></button>
+      <div class="timeline-wrap"><div class="timeline-label"><span>记录进度</span><span id="record-time">00:00</span></div><input id="timeline" type="range" min="0" max="1" step="0.001" value="0" aria-label="当前记录进度"></div>
+      <div class="transport" role="group" aria-label="记录播放控制"><button id="step-back" type="button" aria-label="后退一步">←</button><button id="play-toggle" type="button" aria-pressed="false">播放</button><button id="step-forward" type="button" aria-label="前进一步">→</button><button id="reset-record" type="button" aria-label="复位当前记录">复位</button></div>
+      <div class="record-boundary"><span class="boundary-mark">/</span><p id="record-boundary">棋盘与着法为教学局面；不复原某一局完整棋谱。</p></div>
+      <details class="source-details"><summary>来源与建模边界</summary><p id="record-source">历史配置、芯片功能图与档案照片在对应记录中标注；未公开的裸片坐标不会被补造。</p><a href="../review/data.json">查看项目资料索引 ↗</a></details>
+    </aside>
+  </main>
+  <footer class="strategy-footer"><span>30 节点 × 2 卡 × 8 芯片 = <strong>480</strong></span><span>人的知识 · 软件搜索 · 专用硬件</span><a href="../prototype/">进入 01 三维展品 ↗</a></footer>
+</body>
+</html>

@@ -3,6 +3,7 @@ import { createChipUI } from './chip-ui.js';
 import { createTeachingUI } from '../teaching/teaching-ui.js';
 import { createModel } from './model.js';
 import { createScene } from './scene.js';
+import { createMicroState, reduceMicroState, sampleMicroPose } from './micro-state.js';
 import { createState,selectStation,advance,resetState } from './state.js';
 import contract from '../../docs/MODEL_CONTRACT.json';
 const $=id=>document.getElementById(id);
@@ -13,7 +14,7 @@ const lessons=[
  {object:'芯片 · 放大功能示意',title:'分工，深入到硅片。',description:'切换到独立放大层，认识着法生成、评估、搜索控制，以及走法栈与重复检测的分工。',observe:'蓝 / 生成 · 琥珀 / 评估 · 绿 / 搜索控制 · 紫 / 栈与重复检测。',boundary:'放大功能示意，非实际版图；颜色不代表真实物理边界。',next:'已到芯片层'}
 ];
 const media=matchMedia('(prefers-reduced-motion: reduce)');
-let state=createState({reducedMotion:media.matches}),scene,model,raf=0,lastTime=null,disposed=false,lastMoving=null,chipUI;
+let state=createState({reducedMotion:media.matches}),microState=createMicroState({reducedMotion:media.matches}),microElapsed=0,scene,model,raf=0,lastTime=null,disposed=false,lastMoving=null,chipUI;
 const cleanup=[];const detailsKeyboard=createDetailsKeyboard();cleanup.push(()=>detailsKeyboard.dispose());
 function listen(target,name,fn){target.addEventListener(name,fn);cleanup.push(()=>target.removeEventListener(name,fn));}
 function updateUI(){
@@ -23,27 +24,29 @@ function updateUI(){
  $('next').disabled=state.station===3;$('previous').disabled=state.station===0;
  document.querySelectorAll('[data-station]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.station)===state.station)));
 }
-function choose(index){state=selectStation(state,index);scene?.focus(state.station);updateUI();}
-function reset(){state=resetState(state);scene?.focus(0,'perspective');document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view==='perspective')));document.getElementById('view-label').textContent='整体观察';lastTime=null;updateUI();}
+function dispatchMicro(action){microState=reduceMicroState(microState,action);microElapsed=0;if(action?.type==='RESET_MICRO')model?.clearHotspot?.();chipUI?.setMicroState(microState);}
+function choose(index){state=selectStation(state,index);if(state.station!==3)dispatchMicro({type:'RESET_MICRO'});scene?.focus(state.station);updateUI();}
+function reset(){state=resetState(state);dispatchMicro({type:'RESET_MICRO'});scene?.focus(0,'perspective');document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view==='perspective')));document.getElementById('view-label').textContent='整体观察';lastTime=null;updateUI();}
 function showError(error){$('error').hidden=false;$('error-message').textContent=`无法创建或继续使用 WebGL 场景。请启用浏览器硬件加速后重新加载，或先查看资料与分镜。${error?.message?'（'+error.message+'）':''}`;document.querySelectorAll('main button').forEach(b=>{if(!b.closest('#error'))b.disabled=true;});}
 for(const [id,content] of [['show-model',false],['show-content',true]])listen(document.getElementById(id),'click',()=>{document.body.classList.toggle('content-view',content);document.getElementById('show-model').setAttribute('aria-pressed',String(!content));document.getElementById('show-content').setAttribute('aria-pressed',String(content));});
 updateUI();
-const teaching=createTeachingUI({container:document.getElementById('teaching-panel'),onStation:choose,reducedMotion:media.matches});
+const teaching=createTeachingUI({container:document.getElementById('teaching-panel'),onStation:choose,onMicroAction:dispatchMicro,reducedMotion:media.matches});
 try{
- model=createModel(contract);scene=createScene($('scene'),model);
- chipUI=createChipUI({container:document.getElementById('chip-inspector'),onSelect:index=>model.selectRegion(index)});
+ model=createModel(contract);scene=createScene($('scene'),model,contract);
+ chipUI=createChipUI({container:document.getElementById('chip-inspector'),onSelect:index=>{if(index===null)model.clearHotspot();else model.selectRegion(index);},onAction:dispatchMicro});
  scene.onRegionSelect(index=>{chipUI.select(index);if(matchMedia('(max-width:850px)').matches)document.getElementById('show-content').click();});
+ scene.onChipHotspotSelect(id=>{dispatchMicro({type:'SELECT_HOTSPOT',id});chipUI.selectById(id);if(matchMedia('(max-width:850px)').matches)document.getElementById('show-content').click();});
  document.querySelectorAll('[data-station]').forEach(b=>listen(b,'click',()=>choose(Number(b.dataset.station))));
  document.querySelectorAll('[data-view]').forEach(b=>listen(b,'click',()=>{
   scene.focus(state.station,b.dataset.view);document.querySelectorAll('[data-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('view-label').textContent=b.textContent+'观察';
  }));
  listen($('next'),'click',()=>choose(state.station+1));listen($('previous'),'click',()=>choose(state.station-1));listen($('reset'),'click',reset);
- listen(media,'change',()=>{teaching.setReducedMotion(media.matches);state={...state,reducedMotion:media.matches};state=selectStation(state,state.station);lastTime=null;});
+ listen(media,'change',()=>{teaching.setReducedMotion(media.matches);state={...state,reducedMotion:media.matches};state=selectStation(state,state.station);microState=reduceMicroState(microState,{type:'SET_REDUCED_MOTION',value:media.matches});lastTime=null;});
  listen(document,'visibilitychange',()=>{teaching.pause();lastTime=null;if(!document.hidden&&!disposed&&!raf)raf=requestAnimationFrame(frame);});
  listen($('scene'),'webglcontextlost',e=>{e.preventDefault();cancelAnimationFrame(raf);raf=0;showError(new Error('图形上下文已丢失'));});
- function frame(time){raf=0;if(disposed||document.hidden){lastTime=null;return;}const dt=lastTime===null?0:(time-lastTime)/1000;lastTime=time;state=advance(state,dt);teaching.tick(dt);chipUI?.update({station:state.station,progress:state.progress,teaching:document.querySelector("main").classList.contains("teaching-mode")});
+ function frame(time){raf=0;if(disposed||document.hidden){lastTime=null;return;}const dt=lastTime===null?0:(time-lastTime)/1000;lastTime=time;state=advance(state,dt);if(microState.trace==='playing')microElapsed+=dt;teaching.tick(dt);chipUI?.update({station:state.station,progress:state.progress,teaching:document.querySelector("main").classList.contains("teaching-mode"),microState});
   const moving=Math.abs(state.progress-state.target)>1e-6;if(moving!==lastMoving){$('motion-status').textContent=moving?'拆解 / 复原中':'已就位';lastMoving=moving;}
-  try{scene.render(state);}catch(error){showError(error);return;}
+  try{scene.render({...state,microPose:sampleMicroPose(microState,microElapsed)});}catch(error){showError(error);return;}
   raf=requestAnimationFrame(frame);
  }
  raf=requestAnimationFrame(frame);

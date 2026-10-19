@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">AI 训练的数据流</title>
+  <desc id="desc">原创教学信息图，表现训练数据、加速器、检查点与科学结果之间的回路。</desc>
+  <rect width="1200" height="760" fill="#101d28"/>
+  <text x="72" y="94" fill="#76a7df" font-family="Georgia,serif" font-size="30">DATA STREAM / 31</text>
+  <text x="72" y="684" fill="#91a6b1" font-family="Segoe UI,sans-serif" font-size="16" letter-spacing="2">TRAIN · CHECKPOINT · VERIFY · REPEAT</text>
+  <g fill="#263b49" stroke="#90a5ae" stroke-width="3"><rect x="100" y="260" width="205" height="150"/><rect x="390" y="190" width="205" height="290"/><rect x="680" y="260" width="205" height="150"/><rect x="970" y="190" width="145" height="290"/></g>
+  <g fill="#dce4db" font-family="Segoe UI,sans-serif" font-size="22" text-anchor="middle"><text x="202" y="345">数据集</text><text x="492" y="300">加速器</text><text x="492" y="340">矩阵更新</text><text x="782" y="345">检查点</text><text x="1042" y="300">复核</text><text x="1042" y="338">实验</text></g>
+  <g stroke="#d7aa67" stroke-width="5" fill="none" stroke-dasharray="12 8"><path d="M305 335h85M595 335h85M885 335h85M1042 480v120H202V410"/></g>
+  <circle cx="347" cy="335" r="9" fill="#d7aa67"/><circle cx="637" cy="335" r="9" fill="#d7aa67"/><circle cx="927" cy="335" r="9" fill="#d7aa67"/>
+</svg>

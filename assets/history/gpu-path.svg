@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">CPU 与 GPU 的数据路径</title>
+  <desc id="desc">原创教学信息图，表现矩阵数据在 CPU、GPU 和内存之间的往返。</desc>
+  <rect width="1200" height="760" fill="#101d28"/>
+  <text x="72" y="94" fill="#76a7df" font-family="Georgia,serif" font-size="30">DATA PATH / 31</text>
+  <text x="72" y="684" fill="#91a6b1" font-family="Segoe UI,sans-serif" font-size="16" letter-spacing="2">THE WAIT MOVES FROM MULTIPLY TO MEMORY</text>
+  <g stroke="#90a5ae" stroke-width="3"><rect x="105" y="220" width="240" height="190" fill="#283e4b"/><rect x="480" y="160" width="240" height="310" fill="#294943"/><rect x="855" y="220" width="240" height="190" fill="#4c4052"/></g>
+  <g fill="#dce4db" font-family="Segoe UI,sans-serif" text-anchor="middle"><text x="225" y="300" font-size="27">CPU</text><text x="600" y="265" font-size="27">GPU</text><text x="975" y="300" font-size="27">内存</text><text x="600" y="320" font-size="16">矩阵 · 批次 · 梯度</text></g>
+  <g stroke="#d7aa67" stroke-width="5" fill="none" stroke-dasharray="12 8"><path d="M345 300h135"/><path d="M720 300h135"/><path d="M975 410v125H225V410"/></g>
+  <g fill="#bfc9bc"><circle cx="420" cy="300" r="9"/><circle cx="780" cy="300" r="9"/><circle cx="600" cy="535" r="9"/></g>
+  <text x="525" y="605" fill="#d7aa67" font-family="Segoe UI,sans-serif" font-size="19">检查点写入 · 同步 · 复现</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">下一代超级计算的三个问题</title>
+  <desc id="desc">原创教学信息图，表现速度、能源和可复现性在下一代系统中的分岔。</desc>
+  <rect width="1200" height="760" fill="#151f29"/>
+  <text x="72" y="94" fill="#d7aa67" font-family="Georgia,serif" font-size="30">AFTER THE PEAK / 32</text>
+  <text x="72" y="684" fill="#91a6b1" font-family="Segoe UI,sans-serif" font-size="16" letter-spacing="2">A FASTER MACHINE STILL NEEDS A REASON</text>
+  <circle cx="600" cy="355" r="82" fill="#294943" stroke="#bfc9bc" stroke-width="4"/>
+  <text x="600" y="365" fill="#dce4db" font-family="Segoe UI,sans-serif" font-size="25" text-anchor="middle">下一台</text>
+  <g fill="#263b49" stroke="#90a5ae" stroke-width="3"><path d="M600 273L285 165l-90 130 315 70z"/><path d="M682 355l315-70-90-130-315 108z"/><path d="M600 437l-315 70 90 130 315-108z"/></g>
+  <g fill="#d7aa67" font-family="Segoe UI,sans-serif" font-size="25" text-anchor="middle"><text x="270" y="245">能源</text><text x="930" y="245">开放</text><text x="270" y="570">可信</text></g>
+  <path d="M535 320L350 230M665 320l185-90M535 390l-185 90" stroke="#d7aa67" stroke-width="4" stroke-dasharray="8 8"/>
+</svg>

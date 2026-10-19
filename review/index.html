@@ -1,46 +1,70 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#111923">
-  <title>DEEP BLUE · P0 设计审阅</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23111923'/%3E%3Cpath d='M18 18h28v28H18z' fill='none' stroke='%2376a7df' stroke-width='3'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="review.css"><script type="module" src="review.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142633">
+  <meta name="description" content="超级计算机历史档案：从机械计算、真空管与向量机，到 GPU、深蓝与百亿亿次计算。">
+  <title>00 超级计算机史 · DEEP BLUE</title>
+  <link rel="stylesheet" href="palette.css">
+  <link rel="stylesheet" href="history.css">
+  <script type="module" src="history.js"></script>
 </head>
-<body>
-  <a href="#main" class="skip">跳至审阅内容</a>
-  <header class="site-header">
-    <a class="brand" href="#wireframe" aria-label="深蓝 P0 审阅首页"><span class="brand-mark" aria-hidden="true">D<span>B</span></span><span>DEEP BLUE<small>一步棋背后的机器</small></span></a>
-    <nav aria-label="P0 交付物"><a href="#wireframe" data-view="wireframe">首屏线框</a><a href="#storyboard" data-view="storyboard">三层分镜</a><a href="#references" data-view="references">史料参考</a><a href="#review" data-view="review">范围与审阅</a></nav>
-    <a href="prototype/" style="font-size:12px;white-space:nowrap">进入 P1 三维原型 ↗</a><span class="phase-badge"><i></i>P0 · 设计审阅</span>
+<body data-history-preview data-load-state="ready">
+  <a class="skip-content" href="#history-context">跳至历史正文</a>
+  <header class="project-header masthead">
+    <a class="project-brand brand" href="#history" aria-label="Deep Blue 超级计算机历史首页">
+      <span class="archive-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>DEEP BLUE<small>超级计算机历史档案</small></span>
+    </a>
+    <nav class="project-nav archive-chapters" aria-label="Deep Blue 项目导航">
+      <a href="#history" aria-current="page">00 历史档案</a>
+      <a href="prototype/">01 三维展品 ↗</a>
+      <a href="strategy/">02 算法档案 ↗</a>
+    </nav>
+    <div class="project-meta" aria-label="当前档案范围">
+      <span>1930 — 今天</span>
+      <small>32 节历史线索</small>
+    </div>
   </header>
-  <main id="main" tabindex="-1">
-    <section id="wireframe" data-panel="wireframe" aria-label="可点击的教学线框">
-      <div class="section-meta"><span>01 / FIRST EXPERIENCE</span><p>先审阅信息顺序与构图 · 图形为原创示意，三维模型从 P1 开始</p><button id="preview-help" aria-haspopup="dialog" aria-controls="help">预览说明 <span>?</span></button></div>
-      <div class="exhibit-layout">
-        <section class="scene-panel" aria-label="三层场景构图线框">
-          <div class="scene-top"><div class="layer-switch" role="group" aria-label="观察层级"><button data-layer="cluster" aria-pressed="true"><span>01</span> 集群</button><button data-layer="node" aria-pressed="false"><span>02</span> 节点</button><button data-layer="chip" aria-pressed="false"><span>03</span> 芯片</button></div><span class="scene-mode">WIREFRAME / P0.1</span></div>
-          <div class="scene-image"><img id="scene-illustration" src="assets/cluster.svg" alt="双机柜与棋桌的宏观构图示意"><span class="scene-corner">1997<span>HUMAN KNOWLEDGE<br>SEARCH · HARDWARE</span></span></div>
-          <div class="scene-caption"><span id="scene-caption">01 / 集群全貌 · 展览式空间组合</span><span id="scene-focus">棋盘 → 搜索主节点</span></div>
-        </section>
-        <aside class="teaching-panel" aria-labelledby="exhibit-title">
-          <div class="intro-kicker"><span>1997 / 工业计算档案</span><span>INTRODUCTION</span></div>
-          <h1 id="exhibit-title">一步棋，<br>背后的机器。</h1>
-          <p class="exhibit-purpose">人设计棋类知识与搜索算法，<br>再让并行硬件把计算推向极限。</p>
-          <div class="history-facts" aria-label="比赛系统资料"><div><b>30</b><span>搜索节点 <button data-claim="F01" aria-label="查看 30 个搜索节点的依据">↗</button></span></div><div><b>480</b><span>象棋芯片 <button data-claim="F03" aria-label="查看 480 颗芯片的配置依据">↗</button></span></div><p>按 1997 比赛搜索配置标注</p></div>
-          <div class="current-lesson" aria-live="polite" aria-atomic="true"><div class="lesson-counter"><span id="lesson-count">STEP 01 / 05</span><span>跟着做</span></div><h2 id="lesson-title">机器接到了一个棋局。</h2><p id="lesson-do"></p><p id="lesson-watch" class="observe"></p><details id="lesson-explanation"><summary>这说明什么？</summary><p id="lesson-meaning"></p></details></div>
-          <button id="lesson-next" class="primary-action">展开可能性 <span>→</span></button>
-          <div class="lesson-controls"><button id="lesson-previous" disabled>← 上一步</button><button id="lesson-reset">重新开始 ↺</button></div>
-        </aside>
+
+  <main class="history-main" id="history">
+    <section id="history-context" class="archive-cover" data-history-scene aria-labelledby="hero-title">
+      <div class="cover-grid">
+        <div class="cover-copy">
+          <p class="cover-edition">超级计算机史 <span>1930 — 今天</span></p>
+          <h1 id="hero-title" tabindex="-1">速度从来不是<br>一台机器的独角戏。</h1>
+          <p class="hero-intro">从齿轮、真空管到百亿亿次，<br>看看人们怎样把难题拆开，<br>再交给机器一段段算完。</p>
+          <div class="cover-actions">
+            <a class="primary-link" href="#ch01">展开历史档案 <span aria-hidden="true">↓</span></a>
+            <a href="prototype/">进入 Deep Blue 展品 <span aria-hidden="true">↗</span></a>
+            <a href="strategy/">进入算法档案 <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="reading-note">32 节历史线索 · 4 段叙事 · 约 32 分钟阅读</p>
+        </div>
+        <div class="cover-image">
+          <span class="photo-corner">1946 · ENIAC / 第一代电子计算</span>
+          <figure class="archive-photo">
+            <img src="assets/history/eniac.jpg" width="1200" height="904" fetchpriority="high" decoding="async" alt="ENIAC 电子计算机的金属机柜与面板。">
+            <figcaption>ENIAC 把弹道计算从纸张和人工步骤推进到电子脉冲的速度。</figcaption>
+          </figure>
+          <span class="image-register" aria-hidden="true">把问题，交给机器。</span>
+        </div>
       </div>
-      <footer class="journey-footer"><span>一次计算的旅程</span><ol id="journey-steps" aria-label="五步教学导航"></ol><p>每一步，都知道做什么、看哪里。</p></footer>
+      <div class="cover-bottom"><span>从连续运动，到并行网络</span><span>档案已经打开 · 按目录挑一段读</span></div>
+      <div class="lifeline-context" id="lifeline-context">
+        <div class="section-index"><span>导言</span><p>1930—今天 / 总览</p></div>
+        <h2>在“超级”这个词出现之前，计算先学会成为机器。</h2>
+        <div class="section-prose">
+          <p>工程师先用齿轮、积分轮和继电器模拟方程，再把真空管接成能够连续工作的电路。差分分析机、Z3 与 ENIAC 的路线不同，却都在回答同一件事：怎样表示问题，怎样让步骤稳定重复。</p>
+          <p>战争把弹道、雷达、密码和工程设计推到时间边界。机器还远没有今天的通用性，却已经让“算得更快”成为一项需要硬件、程序和操作员共同承担的工作。</p>
+        </div>
+      </div>
     </section>
-    <section id="storyboard" data-panel="storyboard" hidden aria-labelledby="storyboard-title"><div class="page-heading"><div><span class="eyebrow">02 / STORYBOARD</span><h1 id="storyboard-title">从机柜，走进一颗芯片。</h1></div><p>六个镜头连成三层观察。<br>先确认动作关系，再制作精细模型。</p></div><div id="shot-grid" class="shot-grid"></div></section>
-    <section id="references" data-panel="references" hidden aria-labelledby="reference-title"><div class="page-heading"><div><span class="eyebrow">03 / REFERENCE BOARD</span><h1 id="reference-title">每一个细节，都有来处。</h1></div><p>史料确认、教学示意、待核项分别标明。<br>照片在线引用，原创线框保存在本项目。</p></div><div id="reference-board" class="reference-board"></div><div class="section-heading"><h2>逐项史实与建模决定</h2><div id="fact-filters" role="group" aria-label="筛选依据状态"><button data-filter="all" aria-pressed="true">全部</button><button data-filter="confirmed" aria-pressed="false">史料确认</button><button data-filter="qualified" aria-pressed="false">条件说明</button><button data-filter="schematic" aria-pressed="false">教学示意</button><button data-filter="pending" aria-pressed="false">待核</button></div></div><div id="fact-list" class="fact-list"></div><div class="section-heading"><h2>原始来源索引</h2><span id="source-count"></span></div><div id="source-list" class="source-list"></div></section>
-    <section id="review" data-panel="review" hidden aria-labelledby="review-title"><div class="page-heading"><div><span class="eyebrow">04 / REVIEW GATE</span><h1 id="review-title">先确认方向，再进入建模。</h1></div><p>本页可记录你的判断并导出。<br>审阅意见保存在本机浏览器。</p></div><div class="scope-grid" id="scope-grid"></div><div class="section-heading"><h2>五个需要你审阅的决定</h2><span id="review-summary" role="status">等待审阅</span></div><form id="decision-form"></form><div class="review-export"><p id="storage-status" role="status">意见仅在本机保存；导出 JSON 后可用于下一轮修改。</p><button id="export-review" class="primary-action">导出审阅意见 ↓</button></div><div class="next-gate"><span>P0 → P1</span><p>P0 交付通过资料与界面检查后，仍等待你确认方向。P1 再制作可操作低精度模型，并验证拆解通道和相机。</p></div></section>
-    <div id="load-error" class="load-error" role="alert" hidden>审阅数据暂未加载成功，请刷新页面重试。</div>
+
+    <div id="history-app" data-history-app aria-live="polite"></div>
   </main>
-  <dialog id="help" aria-labelledby="help-title"><div class="dialog-top"><span>P0 / 预览说明</span><button data-close aria-label="关闭预览说明">×</button></div><h2 id="help-title">现在审阅什么？</h2><p>这是一份可点击的设计线框。你可以检查教学步骤、场景构图、主要入口和史料依据。</p><p>模型、搜索树与芯片均为静态构图。点击按钮会切换教学画面；真正的三维拆解在 P1，小型算法实验在 P3。</p><p>“30 节点 / 480 芯片”是历史配置标签；本预览没有显示性能测量或实际搜索计数。</p></dialog>
-  <dialog id="fact-dialog" aria-labelledby="fact-dialog-title"><div class="dialog-top"><span>依据 / 展签口径</span><button data-close aria-label="关闭依据说明">×</button></div><h2 id="fact-dialog-title"></h2><div id="fact-dialog-content"></div></dialog>
+
+  <footer class="footer-colophon"><span>DEEP BLUE</span><span>看机器怎么变快，也看谁在旁边守着它。</span><a href="prototype/">进入三维展品 ↗</a></footer>
 </body>
 </html>

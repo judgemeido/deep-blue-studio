@@ -18,6 +18,57 @@
     "nodeNumbering": "teaching-only; no claimed historical slot map",
     "microScale": "explicit magnified teaching view; physical package dimensions pending"
   },
+  "microChip": {
+    "status": "teaching-reconstruction",
+    "displayLabel": "芯片内部：教学重建，非历史版图",
+    "softwareBoundary": "transposition-table-remains-in-search-layer",
+    "layers": {
+      "package": {
+        "status": "schematic",
+        "sources": ["S8"],
+        "boundary": "封装轮廓与盖板为放大示意，公开资料未确认精确封装型号、尺寸或丝印。"
+      },
+      "substrate": {
+        "status": "schematic",
+        "sources": ["S2"],
+        "boundary": "基板、焊盘与少量走线表达板卡和芯片的教学关系，不是历史服务图。"
+      },
+      "die": {
+        "status": "teaching-reconstruction",
+        "sources": ["S8", "S2"],
+        "boundary": "裸片轮廓参考公开近摄；功能区是覆盖层，不能当作真实版图分区。"
+      },
+      "bondWires": {
+        "status": "schematic",
+        "sources": [],
+        "boundary": "键合线只表达封装到裸片的连接关系，数量、路径和针脚编号未核实。"
+      },
+      "pins": {
+        "status": "schematic",
+        "sources": [],
+        "boundary": "引脚排只表达封装边界和方向，未声明真实针脚数量、编号或电气功能。"
+      }
+    },
+    "hotspots": {
+      "moves": { "label": "着法生成", "input": "当前局面与走棋方", "output": "候选着法流", "boundary": "功能示意，不是实际裸片区域" },
+      "evaluate": { "label": "局面评估", "input": "待比较的局面", "output": "局面评分", "boundary": "功能示意，不是实际裸片区域" },
+      "control": { "label": "搜索控制", "input": "候选着法、评分与搜索界限", "output": "分支选择与回传值", "boundary": "功能示意，不是实际裸片区域" },
+      "stack": { "label": "走法栈与重复检测", "input": "当前搜索路径与走法记录", "output": "路径记录与重复标志", "boundary": "功能示意；置换表仍属于软件搜索层" }
+    },
+    "sources": ["S1", "S2", "S8"]
+  },
+  "siteEnvironment": {
+    "status": "teaching-reconstruction",
+    "eraTag": "1997",
+    "boundary": "工业计算机房 / 展陈空间的尺度重建，不是比赛现场平面图",
+    "parts": ["floor", "plinth", "backWall", "sideWall", "lightSlots", "cableTray", "ventilation", "labels", "aisleMarkers"],
+    "props": [
+      { "id": "crt", "eraTag": "1997", "status": "teaching-reconstruction", "sourceIds": [] },
+      { "id": "maintenance-record", "eraTag": "1997", "status": "teaching-reconstruction", "sourceIds": [] },
+      { "id": "numbered-cable", "eraTag": "1997", "status": "teaching-reconstruction", "sourceIds": [] }
+    ],
+    "modes": ["overview", "structure", "quiet"]
+  },
   "motionSequence": [
     { "id": "door", "parent": "cabinet", "motion": "rotate around hinge on Y", "dependsOn": [], "check": "door sweep clears table and node corridor" },
     { "id": "disconnect", "parent": "node", "motion": "show released connectors", "dependsOn": ["door"], "check": "no connected cable stretches through extraction" },

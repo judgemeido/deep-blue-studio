@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">SAGE 雷达值班台教学构图</title>
+  <desc id="desc">深蓝色控制室中的圆形雷达屏幕、电话线路和夜班记录。</desc>
+  <rect width="1200" height="760" fill="#071d2a"/>
+  <rect x="80" y="72" width="1040" height="590" rx="18" fill="#102f3c" stroke="#bd9b59" stroke-width="4"/>
+  <circle cx="430" cy="340" r="210" fill="#03131c" stroke="#8fb7b5" stroke-width="10"/>
+  <path d="M430 340L590 235M430 340L300 180M430 340L660 400" stroke="#8fb7b5" stroke-width="5" opacity=".8"/>
+  <circle cx="430" cy="340" r="9" fill="#e6bd69"/>
+  <g fill="#dce9e4"><circle cx="556" cy="285" r="7"/><circle cx="335" cy="230" r="6"/><circle cx="610" cy="420" r="6"/></g>
+  <rect x="720" y="145" width="270" height="330" fill="#071b25" stroke="#67949a" stroke-width="3"/>
+  <path d="M750 190h210M750 240h180M750 290h220M750 340h150M750 390h195" stroke="#67949a" stroke-width="4"/>
+  <g fill="#e6bd69"><circle cx="760" cy="550" r="12"/><circle cx="805" cy="550" r="12"/><circle cx="850" cy="550" r="12"/></g>
+  <path d="M130 620h940" stroke="#bd9b59" stroke-width="3"/>
+  <text x="120" y="110" fill="#e8efe9" font-family="monospace" font-size="28" letter-spacing="4">SAGE / NIGHT WATCH / 1958</text>
+</svg>

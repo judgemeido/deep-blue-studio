@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">液冷节点的循环路径</title>
+  <desc id="desc">原创教学信息图，表现液体从冷却站进入节点并带走热量。</desc>
+  <rect width="1200" height="760" fill="#111c27"/>
+  <text x="72" y="94" fill="#76a7df" font-family="Georgia,serif" font-size="30">LIQUID LOOP / 30</text>
+  <text x="72" y="684" fill="#91a6b1" font-family="Segoe UI,sans-serif" font-size="16" letter-spacing="2">PUMP · PLATE · RETURN · REPEAT</text>
+  <g fill="#263b49" stroke="#90a5ae" stroke-width="3"><rect x="130" y="220" width="220" height="300"/><rect x="490" y="220" width="220" height="300"/><rect x="850" y="220" width="220" height="300"/></g>
+  <g fill="#cbd4c8"><rect x="165" y="270" width="150" height="34"/><rect x="165" y="335" width="150" height="34"/><rect x="165" y="400" width="150" height="34"/><rect x="525" y="270" width="150" height="34"/><rect x="525" y="335" width="150" height="34"/><rect x="525" y="400" width="150" height="34"/><rect x="885" y="270" width="150" height="34"/><rect x="885" y="335" width="150" height="34"/><rect x="885" y="400" width="150" height="34"/></g>
+  <g fill="#dce4db" font-family="Segoe UI,sans-serif" font-size="21" text-anchor="middle"><text x="240" y="570">冷却站</text><text x="600" y="570">节点</text><text x="960" y="570">换热器</text></g>
+  <path d="M350 270h140M710 270h140M960 520v82H240v-82" fill="none" stroke="#76a7df" stroke-width="8" stroke-linecap="round"/>
+  <path d="M350 440h140M710 440h140" fill="none" stroke="#d7aa67" stroke-width="8" stroke-linecap="round"/>
+</svg>

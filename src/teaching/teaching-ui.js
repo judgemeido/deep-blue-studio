@@ -8,14 +8,14 @@ const chapters=[
  ['把任务分给不同节点。','把左右两个根子树作为独立任务，观察 1、4、8 个虚拟工作者如何分工。','只有两个任务，多出来的工作者会空闲；并行不意味着无限加速。'],
  ['分工，一直深入到芯片。','现在从整机进入节点、板卡和芯片，连接刚才的计算过程与物理硬件。','P2SC 负责通用软件工作，专用象棋芯片承担特定搜索与评估任务。']
 ];
-export function createTeachingUI({container,onStation,reducedMotion=false}){
+export function createTeachingUI({container,onStation,onMicroAction=()=>{},reducedMotion=false}){
  let active=false,lesson=0,strategy='minimax',reverse=false,workers=1,tree,result,playback,reduced=reducedMotion;
  const abort=new AbortController();let renderAbort=new AbortController();let advancedOpen=false;
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
  const button=(text,fn)=>{const b=el('button',text);b.type='button';b.addEventListener('click',fn,{signal:renderAbort.signal});return b;};
  const launch=document.getElementById('teaching-toggle');
  function rebuild(){tree=makeTeachingTree({reverse});result=runSearch(tree,{strategy});playback=createPlayback(result.events);}
- function changeLesson(n){lesson=Math.max(0,Math.min(4,n));strategy=lesson===2?'alphabeta':'minimax';rebuild();onStation(0);render();}
+ function changeLesson(n){lesson=Math.max(0,Math.min(4,n));strategy=lesson===2?'alphabeta':'minimax';rebuild();onStation(lesson===4?3:0);render();}
  function setActive(value,{station=0,content=value}={}){
   active=value;pause();container.hidden=!active;
   document.querySelector('main').classList.toggle('teaching-mode',active);
@@ -62,7 +62,7 @@ export function createTeachingUI({container,onStation,reducedMotion=false}){
    const tasks=tree.children.map(n=>({id:n.id,cost:runSearch(n).visitedNodes})),schedule=scheduleTasks(tasks,workers);
    const chart=el('div',undefined,'schedule');for(let i=0;i<workers;i++){const row=el('div',undefined,'worker-row');row.append(el('span',`W${i+1}`));const jobs=schedule.assignments.filter(a=>a.worker===i),track=el('div',undefined,'worker-track');jobs.forEach(a=>{const bar=el('span',`${a.id} · ${a.start}–${a.end}`);bar.style.left=`${a.start/schedule.makespan*100}%`;bar.style.width=`${(a.end-a.start)/schedule.makespan*100}%`;track.append(bar);});if(!jobs.length)track.append(el('small','空闲'));row.append(track);chart.append(row);}container.append(chart,el('p',`完成时间 ${schedule.makespan} 逻辑单位；${schedule.idleWorkers.length} 个空闲工作者。`,'comparison'),el('p','逻辑调度示意，非真实测速。两个子树独立全搜索，不共享剪枝界限。虚拟工作者不是历史 30 节点或 480 颗芯片。','teaching-observe'));
   }
-  if(lesson===4){const tools=el('div',undefined,'teaching-tools');[['看节点',1],['看板卡',2],['看芯片',3]].forEach(([label,index])=>tools.append(button(label,()=>{onStation(index);if(matchMedia("(max-width:850px)").matches)document.getElementById("show-model").click();})));tools.append(button('探索芯片四种分工',()=>setActive(false,{station:3,content:true})));container.append(tools,el('p','观察上方三维场景：板卡和放大功能区为教学重建，不代表真实版图。'));}
+  if(lesson===4){const tools=el('div',undefined,'teaching-tools');[['看节点',1],['看板卡',2],['看芯片',3]].forEach(([label,index])=>tools.append(button(label,()=>{onStation(index);if(matchMedia("(max-width:850px)").matches)document.getElementById("show-model").click();})));tools.append(button('探索芯片四种分工',()=>setActive(false,{station:3,content:true})),button('开盖查看',()=>{setActive(false,{station:3,content:true});onMicroAction({type:'OPEN_LID'});}),button('追踪一次信号',()=>{setActive(false,{station:3,content:true});onMicroAction({type:'OPEN_LID'});onMicroAction({type:'START_TRACE'});}));container.append(tools,el('p','观察上方三维场景：板卡和放大功能区为教学重建，不代表真实版图。'));}
   const bottom=el('div',undefined,'teaching-tools teaching-bottom');const back=button('← 教学上一步',()=>changeLesson(lesson-1));back.disabled=lesson===0;const next=button(lesson===4?'完成教学，返回自由观察':'教学下一步 →',()=>lesson===4?toggle():changeLesson(lesson+1));bottom.append(back,next);container.append(bottom);if(explanationFocused)container.querySelector('summary')?.focus({preventScroll:true});else if(focusText){const match=[...container.querySelectorAll("button")].find(b=>b.textContent===focusText&&!b.disabled);match?.focus({preventScroll:true});}
  }
  function describe(e){if(e.type==='enter')return `访问 ${e.nodeId}：${e.max?'MAX 选择更大值':'MIN 选择更小值'}。`;if(e.type==='evaluate')return `评估叶 ${e.nodeId}：给定分值 ${e.value}。`;if(e.type==='return')return `${e.nodeId} 回传 ${e.value}，选择 ${e.bestChildId}。`;if(e.type==='prune')return `${e.nodeId}：${e.reason}`;return `${e.nodeId} 更新界限：α=${e.alpha}，β=${e.beta}。`;}

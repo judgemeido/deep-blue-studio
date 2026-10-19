@@ -4,7 +4,9 @@
 
 状态：供监督审阅；实施以本方案定稿后的分阶段任务为准。
 
-使用技能：three-product-studio。
+使用技能：three-product-studio、3dviz-pro-max、executing-plans、test-driven-development。
+
+P6 执行备注：芯片微观层和 1997 年时代场地采用可逆的教学重建，所有未被公开资料确认的封装、引脚、键合线和空间道具都保留边界文案，不把示意几何包装成历史实物。
 
 建议项目位置：`C:\Codex\city\deep-blue-studio`，单独使用 Git 管理。当前交付物为方案文档。
 

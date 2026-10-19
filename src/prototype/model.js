@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { cameraPose } from './scene.js';
 import { createPaintTexture } from './surface.js';
 import { createCabinetDoor } from './cabinet-door.js';
+import { createChipAssembly } from './chip-model.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 export function createModel(contract){
  const root=new THREE.Group(),physical=new THREE.Group();root.add(physical);
@@ -42,11 +43,8 @@ export function createModel(contract){
   for(let j=0;j<12;j++)box(card,0.035,0.018,0.022,(j%2===0?1:-1)*0.225,0.021,-0.40+Math.floor(j/2)*0.15,edge);
   for(let j=0;j<6;j++)box(card,0.004,0.002,0.72,-0.065+j*0.024,0.014,0, gold);
  }
- const micro=new THREE.Group();root.add(micro);micro.position.set(0,2,2.8);
- box(micro,2.15,0.15,1.8,0,0,0,chip);box(micro,1.65,0.025,1.3,0,0.09,0,gold);
- const colors=[0x5b9fc2,0xbca16b,0x669e88,0x9983b1];
- for(let j=0;j<4;j++)box(micro,0.71,0.035,0.53,(j%2-0.5)*0.82,0.13,(Math.floor(j/2)-0.5)*0.64,mat(`function${j}`,colors[j]));
- for(let i=0;i<16;i++){box(micro,0.055,0.05,0.24,-0.97+i*0.13,-0.04,1.0,gold);box(micro,0.055,0.05,0.24,-0.97+i*0.13,-0.04,-1.0,gold);}
+ const microAssembly=createChipAssembly({contract});
+ const micro=microAssembly.root;root.add(micro);micro.position.set(0,2,2.8);
  node.scale.y=0.5; // Teaching chassis compressed vertically to clear the 0.225 slot pitch.
  const nodeOrigin=node.position.clone();
  // Keep the selected board's pivot in unscaled exhibit space. A rotated child of
@@ -56,16 +54,62 @@ export function createModel(contract){
  const cardOrigin=cards[0].position.clone();
  const boardCenter=cardOrigin.clone().add(new THREE.Vector3(0,0.4,2.8));
  const facing=new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0),cameraPose(5).position.sub(boardCenter).normalize());
- const detailMaterials=new Set();micro.traverse(o=>{if(o.material){o.castShadow=false;o.receiveShadow=false;o.material=o.material.clone();o.material.transparent=true;detailMaterials.add(o.material);}});
+ const detailMaterials=new Set();micro.traverse(o=>{if(o.material){o.castShadow=false;o.receiveShadow=false;o.material.transparent=true;detailMaterials.add(o.material);}});
  const originalShadows=new Map();physical.traverse(o=>{if(o.isMesh)originalShadows.set(o,o.castShadow);});
  const physicalMaterials=new Set();physical.traverse(o=>{if(o.material)physicalMaterials.add(o.material);});
  const anchor=new THREE.Vector3(),anchorRotation=new THREE.Quaternion(),detailEnd=new THREE.Vector3(0,2,2.8),identity=new THREE.Quaternion();
  const smooth=t=>{const x=Math.max(0,Math.min(1,t));return x*x*(3-2*x);};
- const regions=micro.children.slice(2,6);regions.forEach((r,i)=>{r.userData.regionIndex=i;});
- const parts={regions,physical,door,node,cover,cards,chips,cpu,micro,nodes,moving:[door,node,cover,cards[0],micro]};
+ const regions=microAssembly.parts.regions;regions.forEach((r,i)=>{r.userData.regionIndex=i;});
+ const parts={regions,physical,door,node,cover,cards,chips,cpu,micro,microParts:microAssembly.parts,microHotspots:microAssembly.hotspots,nodes,moving:[door,node,cover,cards[0],micro]};
  root.userData.logicalChipCount=contract.configuration.searchNodeCount.value*contract.configuration.cardsPerNode.value*contract.configuration.chipsPerCard.value;
- let disposed=false;
- return {root,parts,selectRegion(index){regions.forEach((r,i)=>{r.material.emissive.copy(r.material.color);r.material.emissiveIntensity=i===index?0.45:0;});},applyPose(p){
+ let disposed=false;let selectedHotspot=null;
+ const setHotspot=id=>{selectedHotspot=regions.some(r=>r.userData.hotspotId===id)?id:null;regions.forEach((r,i)=>{r.material.emissive.copy(r.material.color);r.material.emissiveIntensity=r.userData.hotspotId===selectedHotspot?0.45:0;});};
+ return {root,parts,selectRegion(index){const id=regions[index]?.userData.hotspotId;setHotspot(id);},setHotspot(id){setHotspot(id);},clearHotspot(){setHotspot(null);},getMicroCameraPose(view='perspective', aspect=1){
+  root.updateMatrixWorld(true);
+  const box=new THREE.Box3().setFromObject(micro);
+  const target=box.getCenter(new THREE.Vector3());
+  const size=box.getSize(new THREE.Vector3());
+  const extent=Math.max(size.x,size.y,size.z,0.1);
+  const direction=view==='front'?new THREE.Vector3(0,0.14,1):view==='side'?new THREE.Vector3(1,0.12,0.12):view==='top'?new THREE.Vector3(0.12,1,0.02):new THREE.Vector3(1.25,0.85,1.8);
+  const distance=Math.max(2.7,extent*2.75)*Math.max(1,1.25/Math.max(0.35,aspect));
+  return {target,position:target.clone().add(direction.normalize().multiplyScalar(distance))};
+ },applyMicroPose(pose={}){
+  const setGroupOpacity=(group,opacity)=>{group.traverse(o=>{if(!o.material)return;const materials=Array.isArray(o.material)?o.material:[o.material];materials.forEach(m=>{m.transparent=opacity<1;m.opacity=opacity;});});};
+  if(Number.isFinite(pose.lidAngle))microAssembly.parts.lid.rotation.x=pose.lidAngle;
+  if(Number.isFinite(pose.sideOpacity))setGroupOpacity(microAssembly.parts.packageBody,pose.sideOpacity);
+  if(Number.isFinite(pose.cutawayOffset)){
+   const offset=Math.max(0,Math.min(0.7,pose.cutawayOffset));
+   microAssembly.wallHomes.forEach((home,wall)=>{
+    wall.position.copy(home);
+    if(wall.name==='front-wall')wall.position.z+=offset;
+    if(wall.name==='left-wall')wall.position.x-=offset;
+   });
+  }
+  if(Number.isFinite(pose.sectionPlaneOpacity)){
+   const plane=microAssembly.parts.sectionPlane;
+   plane.material.opacity=Math.max(0,Math.min(1,pose.sectionPlaneOpacity));
+   plane.visible=plane.material.opacity>0.01;
+   plane.position.x=0.76+(Number.isFinite(pose.cutawayOffset)?Math.max(0,pose.cutawayOffset)*0.18:0);
+  }
+  if(Number.isFinite(pose.dieOpacity)){microAssembly.parts.die.visible=pose.dieOpacity>0.01;setGroupOpacity(microAssembly.parts.die,pose.dieOpacity);}
+  if(microAssembly.parts.dieCore)microAssembly.parts.dieCore.visible=microAssembly.parts.die.visible;
+  if(Number.isFinite(pose.wireOpacity)){microAssembly.parts.bondWires.visible=pose.wireOpacity>0.01;setGroupOpacity(microAssembly.parts.bondWires,pose.wireOpacity);}
+  if(Number.isFinite(pose.pinOpacity)){microAssembly.parts.pins.visible=pose.pinOpacity>0.01;setGroupOpacity(microAssembly.parts.pins,pose.pinOpacity);}
+  if(Number.isFinite(pose.wireOpacity))microAssembly.parts.traceLayer.visible=pose.wireOpacity>0.01;
+  if(Number.isFinite(pose.traceProgress)){
+   const progress=Math.max(0,Math.min(1,pose.traceProgress));
+   micro.userData.traceProgress=progress;
+   const segmentCount=microAssembly.parts.traceSegments.length;
+   microAssembly.parts.traceSegments.forEach(({mesh,material},index)=>{
+    const local=progress*segmentCount-index;
+    material.opacity=local>=1?0.98:local>0?0.92:0.32;
+    mesh.visible=true;
+   });
+   const pulse=microAssembly.parts.tracePulse;
+   pulse.position.copy(microAssembly.traceCurve.getPointAt(progress));
+   pulse.material.opacity=progress>0.001?0.98:0;
+  }
+ },applyPose(p){
   door.rotation.y=p.doorAngle;node.position.copy(nodeOrigin);node.position.z+=p.nodeZ;
   cover.position.set(p.coverX,0.31+p.coverY,0);
   cards[0].position.copy(cardOrigin);cards[0].position.y+=p.cardY*0.5;cards[0].position.z+=p.nodeZ;cards[0].quaternion.identity().slerp(facing,p.cardAngle/(Math.PI/5));
@@ -78,9 +122,16 @@ export function createModel(contract){
   physicalMaterials.forEach(m=>{m.transparent=fade>0;m.opacity=1-fade;m.depthWrite=true;});
     physical.traverse(o=>{if(o.isMesh)o.castShadow=t<0.12&&originalShadows.get(o);});
   chips[0].visible=t<=0.12;
+  const microParts={...microAssembly.parts};
+  microParts.lid.visible=t>0.12;
+  microParts.substrate.visible=t>0.22;
+  microParts.traces.visible=t>0.26;
+  microParts.pins.visible=t>0.3;
+  microParts.die.visible=t>0.4;
+  microParts.bondWires.visible=t>0.4;
   detailMaterials.forEach(m=>{m.opacity=smooth((t-0.12)/0.12);m.depthWrite=true;});
   // Function blocks only emerge once the magnified package has established its scale.
-  micro.children.slice(2,6).forEach(o=>{o.scale.y=0.01+0.99*smooth((t-0.6)/0.4);o.material.opacity*=smooth((t-0.6)/0.4);});
+  regions.forEach(o=>{o.scale.y=0.01+0.99*smooth((t-0.6)/0.4);o.material.opacity=0.76*smooth((t-0.6)/0.4);});
   root.updateMatrixWorld(true);
  },dispose(){if(disposed)return;disposed=true;const gs=new Set(),ms=new Set();root.traverse(o=>{if(o.geometry)gs.add(o.geometry);if(o.material)ms.add(o.material);});const maps=new Set();ms.forEach(m=>{if(m.roughnessMap)maps.add(m.roughnessMap);});maps.forEach(t=>t.dispose());gs.forEach(g=>g.dispose());ms.forEach(m=>m.dispose());}};
 }

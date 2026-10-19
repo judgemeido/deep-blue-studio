@@ -13,3 +13,18 @@ export function checkClearance(model,progress){
   return penetration>1e-6?[{pair,penetration}]:[];
  });
 }
+
+export function checkChipAssemblyClearance(model, progress, microState = {}) {
+  if (progress !== undefined) model.applyPose(samplePose(progress));
+  const p = model.parts;
+  if (!p.microParts) return [{ pair: 'micro/missing', penetration: 1 }];
+  model.root.updateMatrixWorld(true);
+  const checks = [];
+  const tracked = [p.microParts.packageBody, p.microParts.lid, p.microParts.substrate, p.microParts.die, p.microParts.bondWires, p.microParts.pins];
+  for (const object of tracked) {
+    if (!object.visible) continue;
+    const box = new Box3().setFromObject(object);
+    if (![...box.min, ...box.max].every(Number.isFinite)) checks.push({ pair: 'micro/non-finite', state: microState });
+  }
+  return checks;
+}

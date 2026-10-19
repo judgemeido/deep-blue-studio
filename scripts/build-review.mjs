@@ -1,6 +1,16 @@
-import { mkdir, writeFile, readFile } from 'node:fs/promises';
+import { mkdir, writeFile, readFile, copyFile, readdir } from 'node:fs/promises';
 const root = new URL('../', import.meta.url), out = new URL('review/assets/', root);
 await mkdir(out, { recursive: true });
+const sourceHistory = new URL('assets/history/', root), targetHistory = new URL('history/', out);
+await mkdir(targetHistory, { recursive: true });
+for (const name of await readdir(sourceHistory)) {
+  await copyFile(new URL(name, sourceHistory), new URL(name, targetHistory));
+}
+const sourceHistoryModules = new URL('src/history/', root), targetHistoryModules = new URL('history/', new URL('review/', root));
+await mkdir(targetHistoryModules, { recursive: true });
+for (const name of ['chapters.js', 'render-history.js', 'milestone-controller.js']) {
+  await copyFile(new URL(name, sourceHistoryModules), new URL(name, targetHistoryModules));
+}
 const ink = '#afc0cd', blue = '#76a7df', gold = '#d7aa67', dark = '#18232e';
 const text = (x, y, value, color = ink, size = 14, extra = '') => `<text x="${x}" y="${y}" fill="${color}" font-size="${size}" ${extra}>${value}</text>`;
 const line = (x1, y1, x2, y2, color = ink, extra = '') => `<path d="M${x1} ${y1}L${x2} ${y2}" fill="none" stroke="${color}" stroke-width="1.5" ${extra}/>`;
